@@ -1,0 +1,1 @@
+from ._auth_structure import AuthStructure
