@@ -8,3 +8,5 @@ class Account(Struct, rename="camel"):
     modified_time:  str
     status:         int
     media_list:     list[Any] | None
+
+__all__ = ["Account"]

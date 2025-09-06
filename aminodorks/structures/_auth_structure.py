@@ -7,3 +7,5 @@ class AuthStructure(Struct, rename="camel"):
     sid:        str
     auid:       str
     account:    Account
+
+__all__ = ["AuthStructure"]

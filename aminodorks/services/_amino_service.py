@@ -7,6 +7,7 @@ from ._singleton import Singleton
 from ._dorks_service import DorksService
 from ._headers_builder import HeadersBuilder
 
+
 class AminoService:
     def __init__(self, dorks_service: DorksService) -> None:
         self._headers_builder = HeadersBuilder(dorks_service)

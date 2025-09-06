@@ -80,3 +80,5 @@ class HeadersBuilder:
                 headers["ndc-message-signature"] = await self._dorks_service.ecdsa(headers["auid"], data)
 
         return headers
+
+__all__ = ["HeadersBuilder"]

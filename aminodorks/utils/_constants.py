@@ -34,3 +34,10 @@ class Endpoints(StrEnum):
     LOGIN_PATH = "/api/v1/g/s/auth/login"
     UPLOAD_MEDIA_PATH = "/api/v1/g/s/media/upload"
     UPDATE_PUBLIC_KEY_PATH = "/api/v1/g/s/security/public_key"
+
+__all__ = [
+    "Hosts",
+    "Headers",
+    "HmacKeys",
+    "Endpoints"
+]

@@ -2,6 +2,7 @@ from typing import Any
 from httpx import AsyncClient
 from msgspec.json import Decoder, Encoder
 
+
 class Singleton:
     _encoder = Encoder()
     _decoder = Decoder()
