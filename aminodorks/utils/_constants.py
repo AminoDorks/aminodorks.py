@@ -31,9 +31,24 @@ class HmacKeys(Enum):
 
 
 class Endpoints(StrEnum):
+    # Only for client
     LOGIN_PATH = "/api/v1/g/s/auth/login"
     UPLOAD_MEDIA_PATH = "/api/v1/g/s/media/upload"
     UPDATE_PUBLIC_KEY_PATH = "/api/v1/g/s/security/public_key"
+    LINK_RESOLUTION_PATH = "/api/v1/g/s/link-resolution?q={link}"
+    JOIN_COMMUNITY_PATH = "/api/v1/{ndc_id}/s/community/join"
+    LEAVE_COMMUNITY_PATH = "/api/v1/{ndc_id}/s/community/leave"
+    JOINED_COMMUNITIES_PATH = "/api/v1/g/s/community/joined?v=1&start={start}&size={size}"
+
+    # For client and sub client
+    GET_USER_PATH = "/api/v1/{ndc_id}/s/user-profile/{user_id}"
+    GET_USERS_PATH = "/api/v1/{ndc_id}/s/user-profile?type={type}&start={start}&size={size}"
+    EDIT_USER_PROFILE_PATH = "/api/v1/{ndc_id}/s/user-profile/{auid}"
+
+    # Only for sub client
+    CHAT_PATH = "/api/v1/{ndc_id}/s/chat/thread"
+    JOIN_LEAVE_CHAT_PATH = CHAT_PATH + "/{chat_id}/member/{user_id}"
+    ONLINE_MEMBERS_PATH = "/api/v1/{ndc_id}/s/live-layer?topic=ndtopic:{ndc_id}:online-members&start={start}&size={size}"
 
 __all__ = [
     "Hosts",
