@@ -1,12 +1,15 @@
+from time import time
 from typing import Literal
 from msgspec import convert
 
 from aminodorks.utils import Endpoints
-from aminodorks.services import AminoService
+from aminodorks.services import AminoService, Singleton
 
 from aminodorks.structures import (
+    Thread,
     UserProfileList,
-    UserProfileStructure
+    ThreadStructure,
+    UserProfileStructure,
 )
 
 
@@ -67,3 +70,75 @@ class SubClient:
         )
 
         return response["api:statuscode"]
+
+    async def invite_to_chat(self, user_ids: list[str], chat_id: str) -> int:
+        response = await self._amino_service.post(
+            path=Endpoints.INVITE_TO_CHAT.format(
+                ndc_id=self._ndc_id, chat_id=chat_id
+            ),
+            data=Singleton.encode({
+                "uids": user_ids,
+                "timestamp": int(time() * 1000)
+            })
+        )
+
+        return response["api:statuscode"]
+
+    async def get_chats(self, start: int = 0, size: int = 100) -> ThreadStructure:
+        return convert(
+            await self._amino_service.get(
+                path=Endpoints.GET_JOINED_CHATS_PATH.format(
+                    ndc_id=self._ndc_id, start=start, size=size
+                )
+            ), ThreadStructure)
+
+    async def get_chat(self, chat_id: str) -> Thread:
+        return convert(
+            await self._amino_service.get(
+                path=Endpoints.GET_CHAT_PATH.format(
+                    ndc_id=self._ndc_id, chat_id=chat_id
+                )
+            ), Thread)
+
+    async def get_public_chats(
+        self,
+        start: int = 0,
+        size: int = 100,
+        chat_type: Literal["recommended", "hidden"] = "recommended"
+    ) -> ThreadStructure:
+        return convert(
+            await self._amino_service.get(
+                path=Endpoints.GET_PUBLIC_CHATS_PATH.format(
+                    ndc_id=self._ndc_id, type=chat_type, start=start, size=size
+                )
+            ), ThreadStructure)
+
+    async def send_message(
+        self,
+        chat_id: str,
+        content: str,
+        message_type: int = 0,
+        mentioned_array: list[str] | None = None,
+        reply_message_id: str | None = None
+    ) -> int:
+        response = await self._amino_service.post(
+            path=Endpoints.ADD_MESSAGE_PATH.format(
+                ndc_id=self._ndc_id, chat_id=chat_id
+            ),
+            data=Singleton.encode({
+                "type": message_type,
+                "content": content,
+                "attachedObject": None,
+                "clientRefId": 404354928,
+                "uid": self._amino_service.headers_builder.auid,
+                "extensions": {
+                    "mentionedArray": mentioned_array or []
+                },
+                "replyMessageId": reply_message_id,
+                "timestamp": int(time() * 1000)
+            })
+        )
+
+        return response["api:statuscode"]
+
+__all__ = ["SubClient"]

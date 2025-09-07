@@ -47,7 +47,12 @@ class Endpoints(StrEnum):
 
     # Only for sub client
     CHAT_PATH = "/api/v1/{ndc_id}/s/chat/thread"
+    GET_CHAT_PATH = CHAT_PATH + "/{chat_id}"
+    ADD_MESSAGE_PATH = CHAT_PATH + "/{chat_id}/message"
     JOIN_LEAVE_CHAT_PATH = CHAT_PATH + "/{chat_id}/member/{user_id}"
+    GET_JOINED_CHATS_PATH = CHAT_PATH + "?type=joined-me&start={start}&size={size}"
+    GET_PUBLIC_CHATS_PATH = CHAT_PATH + "?type=public-all&filterType={type}&start={start}&size={size}"
+    INVITE_TO_CHAT = "/api/v1/{ndc_id}/s/chat/thread/{chat_id}/member/invite"
     ONLINE_MEMBERS_PATH = "/api/v1/{ndc_id}/s/live-layer?topic=ndtopic:{ndc_id}:online-members&start={start}&size={size}"
 
 __all__ = [
