@@ -3,7 +3,7 @@ from enum import StrEnum, Enum
 
 class Hosts(StrEnum):
     AMINOAPPS_API = "https://service.aminoapps.com"
-    DORKS_API = "https://qfhmflnp-3000.euw.devtunnels.ms"
+    DORKS_API = "https://aminodorks.agency"
 
 
 class Headers(Enum):
