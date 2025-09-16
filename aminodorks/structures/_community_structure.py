@@ -8,6 +8,7 @@ class Agent(Struct, rename="camel"):
     ndc_id:     int | None
     nickname:   str | None
 
+
 class Community(Struct, rename="camel"):
     ndc_id:             int | None
     link:               str | None
@@ -16,6 +17,7 @@ class Community(Struct, rename="camel"):
     members_count:      int | None
     primary_language:   str | None
     agent:              Agent | None
+
 
 class CommunityStructure(Struct, rename="camel"):
     community_list: list[Community]

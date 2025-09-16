@@ -1,5 +1,6 @@
 from msgspec import Struct, field
 
+
 class LinkInfo(Struct, rename="camel"):
     object_id:      str | None = field(default=None)
     target_code:    int | None = field(default=None)
@@ -10,6 +11,7 @@ class LinkInfo(Struct, rename="camel"):
 
 class Extensions(Struct, rename="camel"):
     link_info: LinkInfo | None = field(default_factory=LinkInfo)
+
 
 class LinkInfoV2(Struct, rename="camel"):
     path:           str

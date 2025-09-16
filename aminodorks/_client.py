@@ -196,4 +196,59 @@ class Client:
             ), CommunityStructure
         )
 
+    async def apply_frame(self, frame_id: str, apply_to_all: bool = False) -> int:
+        response = await self._amino_service.post(
+            path=Endpoints.APPLY_FRAME_PATH.format(
+                ndc_id="g"
+            ),
+            data=Singleton.encode({
+                "frameId": frame_id,
+                "applyToAll": int(apply_to_all),
+                "timestamp": int(time() * 1000)
+            })
+        )
+
+        return response["api:statuscode"]
+
+    async def get_block_list(self) -> list[str]:
+        response = await self._amino_service.get(
+            path=Endpoints.GET_BLOCK_LIST.format(
+                ndc_id="g"
+            )
+        )
+
+        return response["blockedUidList"]
+
+    async def follow(self, user_id: str) -> int:
+        response = await self._amino_service.post(
+            path=Endpoints.FOLLOW_PATH.format(
+                ndc_id="g", user_id=user_id
+            ),
+            content_type="application/x-www-form-urlencoded"
+        )
+
+        return response["api:statuscode"]
+
+    async def follow_list(self, user_ids: list[str]) -> int:
+        response = await self._amino_service.post(
+            path=Endpoints.FOLLOW_LIST_PATH.format(
+                ndc_id="g", user_id=self.auid
+            ),
+            data=Singleton.encode({
+                "targetUidList": user_ids,
+                "timestamp": int(time() * 1000)
+            })
+        )
+
+        return response["api:statuscode"]
+
+    async def unfollow(self, user_id: str) -> int:
+        response = await self._amino_service.delete(
+            path=Endpoints.UNFOLLOW_PATH.format(
+                ndc_id="g", auid=self.auid, user_id=user_id
+            )
+        )
+
+        return response["api:statuscode"]
+
 __all__ = ["Client"]

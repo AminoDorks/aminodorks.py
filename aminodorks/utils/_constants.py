@@ -44,6 +44,13 @@ class Endpoints(StrEnum):
     GET_USER_PATH = "/api/v1/{ndc_id}/s/user-profile/{user_id}"
     GET_USERS_PATH = "/api/v1/{ndc_id}/s/user-profile?type={type}&start={start}&size={size}"
     EDIT_USER_PROFILE_PATH = "/api/v1/{ndc_id}/s/user-profile/{auid}"
+    GET_FOLLOWING_PATH = "/api/v1/{ndc_id}/s/user-profile/{user_id}/joined?start={start}&size={size}"
+    APPLY_FRAME_PATH = "/api/v1/{ndc_id}/s/avatar-frame/apply`"
+    GET_FOLLOWERS_PATH = "/api/v1/{ndc_id}/s/user-profile/{user_id}/member?start={start}&size={size}"
+    GET_BLOCK_LIST = "/api/v1/{ndc_id}/s/block/full-list"
+    FOLLOW_PATH = "/api/v1/{ndc_id}/s/user-profile/{user_id}/member"
+    FOLLOW_LIST_PATH = "/api/v1/{ndc_id}/s/user-profile/{user_id}/joined"
+    UNFOLLOW_PATH = "/api/v1/{ndc_id}/s/user-profile/{auid}/joined/{user_id}"
 
     # Only for sub client
     CHAT_PATH = "/api/v1/{ndc_id}/s/chat/thread"
@@ -54,6 +61,8 @@ class Endpoints(StrEnum):
     GET_PUBLIC_CHATS_PATH = CHAT_PATH + "?type=public-all&filterType={type}&start={start}&size={size}"
     INVITE_TO_CHAT = "/api/v1/{ndc_id}/s/chat/thread/{chat_id}/member/invite"
     ONLINE_MEMBERS_PATH = "/api/v1/{ndc_id}/s/live-layer?topic=ndtopic:{ndc_id}:online-members&start={start}&size={size}"
+    KICK_FROM_CHAT_PATH = "/api/v1/{ndc_id}/s/chat/thread/{chat_id}/member/{user_id}?allowRejoin={allow_rejoin}"
+    GET_CHAT_USERS_PATH = "/api/v1/{ndc_id}/s/chat/thread/{chat_id}/member?start={start}&size={size}&type=default&cv=1.2"
 
 __all__ = [
     "Hosts",
