@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="aminodorks.py",
-    version="0.0.1b1",
+    version="0.0.1b10",
     description="Amino API wrapper and tools",
     author="Nullable-developer",
     author_email="nulllable@proton.me",
