@@ -33,13 +33,13 @@ class AminoService:
 
         return response
 
-    async def post(self, path: str, **kwargs) -> dict[str, Any]:
+    async def post(self, path: str, **kwargs: Any) -> dict[str, Any]:
         return Singleton.decode((await self.call("POST", path, **kwargs)).content)
 
-    async def get(self, path: str, **kwargs) -> dict[str, Any]:
+    async def get(self, path: str, **kwargs: Any) -> dict[str, Any]:
         return Singleton.decode((await self.call("GET", path, **kwargs)).content)
 
-    async def delete(self, path: str, **kwargs) -> dict[str, Any]:
+    async def delete(self, path: str, **kwargs: Any) -> dict[str, Any]:
         return Singleton.decode((await self.call("DELETE", path, **kwargs)).content)
 
 __all__ = ["AminoService"]

@@ -28,7 +28,7 @@ class Crypt:
 
     @classmethod
     def decode_session_id(cls, session_id: str) -> dict[str, Any]:
-        return loads(b64decode(reduce(lambda a, e: a.replace(*e), ("-+", "_/"), session_id + "=" * (-len(session_id) % 4)).encode())[1:-20].decode())
+        return loads(b64decode(reduce(lambda a, e: a.replace(*e), ("-+", "_/"), session_id + "=" * (-len(session_id) % 4)).encode())[1:-20].decode()) # type: ignore
 
     @classmethod
     def auid_from_session_id(cls, session_id: str) -> str:
